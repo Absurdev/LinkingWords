@@ -1,0 +1,19 @@
+{
+    "listen-port": 5000,
+
+    "leaderboards-size": 10,
+
+    "max-pending-words-per-user": 50,
+    "max-word-length": 100,
+
+    "first-bottle-push-time": 120000,
+    "min-bottle-push-time": 120000,
+    "max-bottle-push-time": 300000,
+    "max-bottle-message-length": 10000,
+    "max-cast-bottle-count-per-minute": 7,
+
+    "gc-clear-threshold": 45,
+    "gc-interval-between-runs": 5,
+
+    "class-names": ["Creative Neologist", "I can use more than 140 chars here \\o/", "Ceci n'est pas un chat", "Absurd makes sense"]
+}

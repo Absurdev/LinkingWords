@@ -1,0 +1,517 @@
+/***************
+*
+* General
+*
+****************/
+
+* {
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#page-title {
+    color: #bababa;
+    text-align: center;
+    margin: 1em;
+}
+
+html {
+    height: 100%;
+    background: url("../img/linking-words-logo.png") no-repeat center center, url("../img/background.png") repeat top left;
+}
+
+#quote,
+#cheese-job,
+#nyaq {
+    display: none;
+}
+
+a#quote-icon,
+a#hiring-icon,
+a#nyaq-icon,
+a#stats-icon {
+    text-decoration: none;
+}
+
+#today-submitted-count,
+#total-submitted-count {
+    text-align: center;
+    margin-bottom: 1.2em;
+}
+
+.stat-title {
+    font-weight: bold;
+}
+
+#today-submitted-count ul,
+#total-submitted-count ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#leader-boards {
+    margin-top: 24px;
+}
+
+.nyaq-question-group {
+    margin-bottom: 2em;
+    margin-top: 1em;
+}
+
+.alertify .ajs-body .ajs-content p.nyaq-question {
+    font-weight: bold;
+    font-style: italic;
+    margin-bottom: 0.5em;
+}
+/***************
+*
+* Words
+*
+****************/
+
+#pending-words-list-header {
+    color: #bababa;
+}
+
+#word {
+    margin-bottom: 0.5em;
+}
+
+#pending-words-container {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    display: none;
+}
+
+#toss-button {
+    border-radius: 3px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    background-color: cornflowerblue;
+    font-size: large;
+    height: 100%;
+    padding: 2px 10px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-bottom: 0.5em;
+}
+
+#toss-word-form {
+    margin-bottom: 0.5em;
+}
+
+ul#pending-words {
+    padding: 0;
+    list-style-type: none;
+    display: inline-block;
+    margin: 0;
+}
+
+li.pending-word {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    margin: 2px;
+    position: relative;
+    padding: 2px 13px;
+    border-radius: 3px;
+    background-color: #F0F0F0;
+    border-bottom: 1px solid #DDD;
+    border-right: 1px solid #DDD;
+    min-width: 2em;
+    cursor: pointer;
+    box-sizing: content-box;
+}
+
+.pending-word-overlay {
+    background: #5d5d5d;
+    border-bottom: 1px solid #292929;
+    border-right: 1px solid #292929;
+    color: #bfbfbf;
+    border-radius: 3px;
+    text-align: center;
+    margin: 0px 5px 5px 0px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    -webkit-transition: opacity .25s ease;
+    -moz-transition: opacity .25s ease;
+    box-sizing: content-box;
+}
+
+li.pending-word:hover .pending-word-overlay {
+    opacity: 1;
+}
+/***************
+*
+* Bottles
+*
+****************/
+
+#bottle-container {
+    display: none;
+}
+
+#shore-button,
+#seal-button {
+    display: inline-block;
+    border-radius: 3px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    font-size: large;
+    height: 100%;
+    padding: 2px 10px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 0.7em;
+    width: 100%;
+    text-align: center;
+}
+
+#seal-button {
+    background-color: cornflowerblue;
+}
+
+#shore-button {
+    background-color: #92B242;
+}
+/***************
+*
+* Chat
+*
+****************/
+
+#chat-windows-container {
+    margin-top: 1em;
+}
+
+.chat-window {
+    width: 400px;
+    display: block;
+    margin: 1em;
+    float: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    font-size: 14px;
+}
+
+.messages {
+    overflow: auto;
+    overflow-x: hidden;
+    max-height: 300px;
+}
+
+a.send,
+a.leave-room {
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.header {
+    padding: 14px 14px 12px 14px;
+    color: #fff;
+}
+
+.header h2 {
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    width: 330px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+}
+
+.header a {
+    display: inline-block;
+    float: right;
+    background: #666;
+    font-size: 25px;
+    line-height: 20px;
+    padding: 3px 6px;
+    margin-top: -5px;
+    border-radius: 2px;
+}
+
+input.message-input {
+    color: #505050;
+    box-sizing: content-box;
+}
+
+.chat-box,
+.enter-message {
+    background: #ECECEC;
+    color: #a1a1a1;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 0.4em;
+}
+
+.chat-box .message-box {
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+    clear: both;
+}
+
+.message-box .picture {
+    float: left;
+    width: 50px;
+    display: block;
+    padding-right: 10px;
+    box-sizing: content-box;
+}
+
+.picture .img {
+    border: 1px solid;
+    height: 48px;
+    width: 43px;
+    text-align: center;
+    font-size: 18px;
+    display: table-cell;
+    vertical-align: middle;
+    box-sizing: content-box;
+}
+
+.message {
+    background: #fff;
+    display: inline-block;
+    padding-left: 8px;
+    width: 274px;
+    border-radius: 2px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+    position: relative;
+    word-wrap: break-word;
+    box-sizing: content-box;
+}
+
+.message:before {
+    content: "";
+    position: absolute;
+    display: block;
+    left: 0;
+    border-right: 6px solid #fff;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    top: 10px;
+    margin-left: -6px;
+}
+
+.message p {
+    color: #555;
+}
+
+.message-box.right-img .picture {
+    float: right;
+    padding: 0;
+    padding-left: 10px;
+}
+
+.message-box.right-img .message:before {
+    left: 100%;
+    margin-right: 6px;
+    margin-left: 0;
+    border-right: 6px solid transparent;
+    border-left: 6px solid #fff;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
+
+.enter-message {
+    padding: 13px 0px;
+}
+
+.enter-message input {
+    border: none;
+    padding: 10px 12px;
+    background: #d3d3d3;
+    width: 260px;
+    border-radius: 2px;
+}
+
+.enter-message a.send {
+    padding: 10px 15px;
+    border-radius: 2px;
+    float: right;
+}
+
+.chat-status {
+    font-style: italic;
+    color: #5f5f5f;
+    padding-top: 12px;
+}
+
+a.linkified {
+    color: #6495ED;
+    text-decoration: none;
+}
+
+a.linkified:hover {
+    color: #6495ED;
+    text-decoration: underline;
+}
+/***************
+*
+* Tooltipster
+*
+****************/
+
+.tooltipster-green {
+    border-radius: 5px;
+    border: 1px solid #617e1a;
+    background: #92B242;
+    color: #fff;
+}
+
+.tooltipster-blue {
+    border-radius: 5px;
+    border: 1px solid #1e55b7;
+    background: #6495ED;
+    color: #fff;
+}
+
+.tooltipster-blue .tooltipster-content,
+.tooltipster-green .tooltipster-content {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    padding: 8px 10px;
+}
+/***************
+*
+* Loading spinner
+*
+****************/
+/* Absolute Center CSS Spinner */
+
+#loading {
+    position: fixed;
+    z-index: 999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+/* Transparent Overlay */
+
+#loading:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+/* :not(:required) hides these rules from IE9 and below */
+
+#loading:not(:required) {
+    /* hide "loading..." text */
+    
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+#loading:not(:required):after {
+    content: '';
+    display: block;
+    font-size: 10px;
+    width: 1em;
+    height: 1em;
+    margin-top: -0.5em;
+    -webkit-animation: spinner 1500ms infinite linear;
+    -moz-animation: spinner 1500ms infinite linear;
+    -ms-animation: spinner 1500ms infinite linear;
+    -o-animation: spinner 1500ms infinite linear;
+    animation: spinner 1500ms infinite linear;
+    border-radius: 0.5em;
+    -webkit-box-shadow: #eeeeee 1.5em 0 0 0, #eeeeee 1.1em 1.1em 0 0, #eeeeee 0 1.5em 0 0, #eeeeee -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, #eeeeee 0 -1.5em 0 0, #eeeeee 1.1em -1.1em 0 0;
+    box-shadow: #eeeeee 1.5em 0 0 0, #eeeeee 1.1em 1.1em 0 0, #eeeeee 0 1.5em 0 0, #eeeeee -1.1em 1.1em 0 0, #eeeeee -1.5em 0 0 0, #eeeeee -1.1em -1.1em 0 0, #eeeeee 0 -1.5em 0 0, #eeeeee 1.1em -1.1em 0 0;
+}
+/* Animation */
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-moz-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@-o-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        -moz-transform: rotate(0deg);
+        -ms-transform: rotate(0deg);
+        -o-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}

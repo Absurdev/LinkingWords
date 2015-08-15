@@ -1,0 +1,27 @@
+<div id="stats">
+    <div id="pending-counts">
+        <span class="bold"><%= stats.word.pending_words_count %> words</span> are currently waiting to be discovered and <span class="bold"><%= stats.bottle.pending_bottles_count %> bottles</span> are drifting in the sea of Tranquility.
+    </div>
+    <div id="leader-boards">
+        <div id="today-submitted-count">
+            <p class="stat-title">Top 10 words of today</p>
+            <ul>
+                <% for(var i=0; i<stats.leaders_boards.today_match_count.length; i++) {%>
+                    <li>
+                        <%= stats.leaders_boards.today_match_count[i] %>
+                    </li>
+                    <% } %>
+            </ul>
+        </div>
+        <div id="total-submitted-count">
+            <p class="stat-title">Top 10 words of all times</p>
+            <ul>
+                <% for(var i=0; i<stats.leaders_boards.total_match_count.length; i++) {%>
+                    <li>
+                        <%= stats.leaders_boards.total_match_count[i] %>
+                    </li>
+                    <% } %>
+            </ul>
+        </div>
+    </div>
+</div>

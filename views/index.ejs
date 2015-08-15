@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="Connecting through words.">
+    <meta name="keywords" content="instant,chat,app,word,bottle,socket.io">
+    <meta name="author" content="Absurdev">
+
+    <title>Linking Words</title>
+
+    <!-- I never intended to write any html or css.
+         I'm so bad at it.
+         But I've been told that it is mandatory if I want to make a website.
+         So here is the monster. May the old and new Gods of the Web be lenient.
+    -->
+
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+
+    <link rel="stylesheet" type="text/css" href="<%= client_css %>">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/tooltipster.css">
+    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="css/alertify.min.css">
+    <link rel="stylesheet" type="text/css" href="css/themes/default.min.css" />
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u = "//linkingwords.absurdev.com/piwik/";
+            _paq.push(['setTrackerUrl', u + 'piwik.php']);
+            _paq.push(['setSiteId', 1]);
+            var d = document,
+                g = d.createElement('script'),
+                s = d.getElementsByTagName('script')[0];
+            g.type = 'text/javascript';
+            g.async = true;
+            g.defer = true;
+            g.src = u + 'piwik.js';
+            s.parentNode.insertBefore(g, s);
+        }());
+    </script>
+    <noscript>
+        <p>
+            <img src="//linkingwords.absurdev.com/piwik/piwik.php?idsite=1" style="border:0;" alt="" />
+        </p>
+    </noscript>
+    <!-- End Piwik Code -->
+
+</head>
+
+<body>
+
+    <a href="https://github.com/Absurdev/LinkingWords" target="_blank">
+        <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/52760788cde945287fbb584134c4cbc2bc36f904/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f77686974655f6666666666662e706e67"
+        alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png">
+    </a>
+
+    <h1 id="page-title">
+
+        <a href="#" id="quote-icon" title="Quote">
+            <img class="icon icons8-Quote" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC00lEQVRYhcXXXYgWdRQG8HltXdO1VkNBsSRCNBdMuhIxSrCLoNKILCrpQstckTIysDuFVYsuBNGiqC3KC5EoEoMCDTSiTK8SEZXaFpUgU7OSTa1+Xcx5YXid3fm7+6oHBobz8TzP/D/PZFmiYRwexzvYg0P4FadwGHvxPp7E+FTcFOI5+AL/4ny8b8BKPBWEL6ALO/Fn5H6Je4ZCPBW78F8A348RCXXDcS+2h5DdmHal5M/hL3yFu4fwEdND/Hk8n1q0GX9jFYYNlryAV0NniNhSlbwaFzBvqMQl2LNCxOr+Eh6KOXu62eQFjvm4iIcbA23orRyi5ohYH1xtRWcXfsGYayBgFH7CurqjDWfxckLxBNxRfxpikwuxyRU4S4JzdIZHYu5vTRCwU8EaYr2FUG8FzphY7Avr2+7bKvJmCoj8z/FmJj/DP7gOAtbg6ww/oOs6COjEsbqA8sPh8qIVeFt+Ul5qiG1Adwj4MQFrGX7O8L36lkg0/IGeEv/YELAnAeMV7M/wIXZcAfmdQbKrJDY/Yt0JOFvxUYbF8UWjEgVsDpJnSmK7Iza3AmM4TqMzwy3ow2MJ5C/K+4OjaC34b8DrQb43AedBXMKkuqMb36i4fvF7KL+rwd8e5EdwWwVGLUZqW9E5KaZheUXxekwo8bfJ75ObBqqP3EXya/n2xsBLIWJGFchgDVPkjeyrZcFarMyTmHIVyMfjGD5DS39JrfJG9GCTyWfgIL6r3G3yhvREk4hbYmr78CnGphRtSjnJKjBasVTeePTJj/BaSuGN8s5o1QA5HZiNifGFLfE+E8/i49iu5/Ba2a4ZSEC9Nbu5JDYSG+XNS392HO/hCbQnEwfBkgBf0OAfhkfl/38n8ECI6cB98r+gqZWLawDiGtYG+cqCv13c2fJW+t2kRTQIAVtj+PaFkE04gH9iHt9QcbwOVcAn6MEZ/BZ79a0Y9tFXjTjsfzM3puePpt79AAAAAElFTkSuQmCC"
+            width="32" height="32">
+        </a>
+        <a href="#" id="hiring-icon" title="Hiring">
+            <img class="icon icons8-Cheese" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEBUlEQVRYhe2XXYhVVRTHj006WYYFpY6YFBYkfVBQvmhBL0WkReWAIoVUXmbO/q/5QNPCsKF86IPQRjAKqYd8GCakekkNypISzHtn//cdLmNNjTCIEYn5rWM2/x7OGWfu3DvOh2O9uGG/nLX3Wr+99n/vtU8UXWkjaMpmJqoQz/jvA7fXTxfdOhGHRPwjYpuCPXT5AyuaoOBqRRwT0S2PtQq2SB5fiehVwD4Ft0TZzMTxD56vvVHE1yKOirZShaZJRXa6N0Uo7d3yWC3fcMP4BA82S0RHskLcVmL3tkzEOREfyiMW8YZof4ruuIhmtducsQfPZqaKyIv4Rp1WWR4QL4o4LdpbCrZU3jWI6BBBEYUx60RquipNe4eymalDj4smiKgRkZPHYRFdycrrp6e2x0TsHLVOFLBKxCnlcc+oyIf0V3e3iC0izgyrE2XrZ4s4pWB1lxS00yrlG25VG2b2g9RMU8DrIv4YUicimkV3YLDaRxy40DRJREu6/32n44iCLS6CS/STL9FJQuaOi/htjP2QiBMKeFY+flCMFyjgIxFny4ztGgS6OxIhBfeOiMyYusdGET3KZm7qT717VUT3MHM3iVACwHhBUVqzmWtFm6c2PKA9jZNHsAV5BewT3XPyWCvipIKrveg8b0+UBZC3l0WcGJCmv+Sdu6izNsyUx5ep6g8NNz6KokhEYwmAaBDRo+BqlW2oUrahSoSJOK9gzw/ndKRNxCsi/lbA+kEAyMljY8kEb5sV8N24BG+Pb0mEaM/00QwAcD+K+LQMcYto28cFgDYvEb7NKgewUESviA/kMT/ptlnEebHukVEFCrZUxDZ595nyePzC90S0v4jYoWxDVakIgy0W8XMqwN6kyLiFRc7ba+9VsDrRrUmUX3zNpgI7IuJtBdsg4qQ8qvvn2xwRe0X8XvYYRlEUaU/jZB1Yfk3Rt9bqivSS6RVxMKmC7rg8DivYogEAhYHHUAHrRewo8jXUMbxoWmnviThanNJ4SrpNPfLxfSnAThEt6rRKFeIpovtWxJZLAtD+1deLOCdvy0psSSneLbpPoiiKlItvF9EpokfJAyanNrv50gDyuFOE5OvuKGsPtkEe3/dnpmnShdu0tbqiZHwq+JEDdFqliLPytqLEtqvpahFexKai763VFQo105SL58pjvgKelLfloq0UsUtEbuQArdUVaeE5JdoL8u4peVsh2msiPk+yY0HEXnn8KuLogOu8r58RcVDegoJ9oVw8NxJxWkSzCEsfD82i2yra9mGcHRPRJdpPyVi3VXTvi26dvHMKboloj4p2v7L1sxVWXVd+Zd5WiG6/ksflD2lR+Vge74pujYJ7SXRPK+8eFt1dKsQzLsv/wJX2f7V/AXDQmtTM22LrAAAAAElFTkSuQmCC"
+            width="32" height="32">
+        </a>
+        Linking Words (post-Ω version)
+
+        <a href="#" id="nyaq-icon" title="NYAQ">
+            <img class="icon icons8-Faq" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACCElEQVRYhcXXz4uNURjA8XuHZlJjbpTVGFIkaUrZMRIZQ650Q7ORRvJrgdmxUrNBVspG/gDZCPlVFElCGEwUCwsSJYNJya87H4t7bt7FuPd93xnvPfXUec95fnzP+5yec04ul7BhH95iVPr2FZcxI2nwZfiFfnRjVUrZgEc4kxRgAPcTGf3bVy9Gkhodwe0YerPRVkdnHUw4AAooY6BRAN14jGuNAjgU9spHNDUC4CpKeI4FmQKgCV9wFm/QlzXAQoxgMy7gZNYA23Er9LfgSdYA7ZgT+q1YVBcA03ACT/GqhlyJW4hiLmY9yrmQqyHsx84asgl9GEb7OIPncQqDOXxHT0zDFtxTOZA+xZQH1bQEH/PxQeVEXJ5TaV0J6CdjZdjpceQm3mNxsO8KMTuqDmsCoIiXeIG5deCGcHCMv3Y6rHhNBKBQFwDNIedLcAznkgKE8TyO4mfIfWyApfgW+iUMpwGIzO/B7yQAvXgdgYF8WoCgU8QlTIoDUKyuGqsxWsd5XYCxjGoBzAvzbdiBZ5kChPkbuKNyuu1qBMBU7FYpKOcxM1OAiF4ea9E80QCfsS2R0dh+CqHYlJIa7sUPXEdrZLwDF/EwprzDIFrS0PeEVHSG706V59ddHIgpWzElcfAQcFYVACv8vdelczgOgMMhHcfVuFL/T4Ay+jMLHAGYHgrNxqxj/wHlnMpFpwVacwAAAABJRU5ErkJggg=="
+            width="32" height="32">
+        </a>
+        <a href="#" id="stats-icon" title="Statistics">
+            <img class="icon icons8-Bullish" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABiklEQVRYhe3UsUtVYRzGcbUUmjIQtKWpQSHUwE2ChIpAaBCFqN0cQnBwSHBSCJKGoM1WwcEpWsq/IVodHNykIWrohrfCT8M9B3+ee9V79NwzxH3ghff8zu99vg/vec/b0dFWicIVjKC3DNgYnuMtPmEPh2q6WUaAQeyr129cbnmAJMQQvmcC7JQCTwI8C9ue6n0rQJ3oOgVexbdk/qpo+CWsYxM9SW02A5/CML5itkh4J96F7f2I+QD/g+nQP4SRIgO8aXDKU/3FTJGwR+gOzy8D7Ad2M/DHRcIXE+MtdGM5wH5iHP34nMCfFgl/kdnaL2Fewd3Qew33G3isYhvbeeHLTtYBHjTp8yFdlAe+EmBVLDm61aqYzOGVL4DjB+wgheG22r88dcraVBvnCoC1YPILDzPvr56x/vwB8DoYVDQ4UKH3BmaScb2oAHNqt1gFE2f0PgmwyVC/8CdYwJ0m+loT4ARY3X9cdoA6g/83QLMG7QDtAK0McC8Zt0JtNK2H2kDo7cu7vq1U/wCM/+RdF/+ywAAAAABJRU5ErkJggg=="
+            width="32" height="32">
+        </a>
+    </h1>
+
+    <div class="container-fluid">
+        <div id="action-container" class="row">
+            <div id="word-container" class="col-sm-7">
+                <form action="/" method="get" id="toss-word-form" class="form-inline" role="form">
+                    <input type="text" id="word" placeholder="Your word, your world..." class="form-control" autocomplete="off" autofocus>
+                    <input type="submit" id="toss-button" class="btn btn-default" value="Toss!">
+                </form>
+                <div id="pending-words-container">
+                    <span id="pending-words-list-header">Pending words:</span>
+                    <ul id="pending-words"></ul>
+                </div>
+            </div>
+
+            <div id="bottle-container" class="col-sm-5">
+                <form action="/" method="get" id="seal-bottle-form" role="form">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <textarea rows="4" id="bottle-message" class="form-control" placeholder="Write it well, cast it far."></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#" id="seal-button">Seal message in a bottle</a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="#" id="shore-button">Wander on the shore</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="chat-windows-container">
+    </div>
+
+    <div id="cheese-job">
+        <p>I'm not looking to be hired except if the job involves going around the world to taste all the existing cheeses.</p>
+    </div>
+    <div id="quote">
+        Ce que j'écoutais, ce que je guettais, c'étaient les mots, car j'avais la passion des mots ; en secret, sur un petit carnet, j'en faisais une collection, comme d'autres font pour les timbres.
+        <br>
+        <br>J'adorais grenade, bourru, vermoulu et surtout manivelle ; et je me les répétais souvent quand j'étais seul, pour le plaisir de les entendre. Mon père et mon oncle encourageaient cette manie, qui leur paraissait de bon augure, si bien qu'un jour,
+        et sans que ce mot se trouvât dans une conversation (il en aurait été le premier surpris), ils me donnèrent anticonstitutionnellement en me révélant que c'était le mot le plus long de la langue française. Il fallut me l'écrire sur la note de l'épicier
+        que j'avais gardée dans ma poche. Je le recopiais à grand-peine sur une page de mon carnet, et je le lisais chaque soir dans mon lit ; ce n'est qu'au bout de plusieurs jours que je puis maitriser ce monstre
+        <br>
+        <br>
+        <em>La Gloire de mon Père</em>, Marcel Pagnol
+    </div>
+    <div id="nyaq">
+        <div class="nyaq-question-group">
+            <p class="nyaq-question">What is this app?</p>
+            <p class="nyaq-answer">LinkingWords let you quickly connect with many people through words. Words naturally narrow the crowd you want to talk to. I can see a couple of use cases here:
+                <ul>
+                    <li>
+                        You've just finished a book and you want to discuss it with someone. You toss the title of the book and reach somebody else also interested in this book. Note that it's also working with movies and dishes.
+                    </li>
+                    <li>
+                        Have you ever thought about something and asked yourself if somebody else was thinking the same thing at the exact same instant? It's an opportunity to check that.
+                    </li>
+                    <li>
+                        You can try to toss the word 'sex' I'm pretty sure you'll reach somebody instantly.
+                    </li>
+                    <li>
+                        Toss the sha-1 of your first name and see what happens. You'll probably wait. A lot. Cause you're too geek for this world.
+                    </li>
+                </ul>
+                I'm pretty sure you'll come up with others amazing use cases ;).
+            </p>
+        </div>
+
+        <div class="nyaq-question-group">
+            <p class="nyaq-question">How is this site peculiar?</p>
+            <p class="nyaq-answer">You may have noticed that I made some choices regarding this website:
+                <ul>
+                    <li>Here you have no identity, no past and no future. Everything is volatile: as soon as you close the tab of you browser everything disappears in the limbo of the Void/Null/Nil.</li>
+                    <li>
+                        No broadcast to the vast world here - only one to one conversation around a word / a topic that concerns you. I find this more efficient than to tweet about random stuff to a broad audience that don't care. Sounds more like real communication.
+                    </li>
+                    <li>It's all about words here ; not pictures. In today's world we're flooded by images so let's have a break. If you experience drug withdrawal symptoms just open a tab with Instagram or Youtube.</li>
+                    <li>This is not serious.</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="nyaq-question-group">
+            <p class="nyaq-question">Is this useful?</p>
+            <p class="nyaq-answer">Not really - just another useless modern entertaining app to keep your brain busy. You'd definitively prefer to grab a book or enjoy fresh air outside.</p>
+        </div>
+
+        <div class="nyaq-question-group">
+            <p class="nyaq-question">So why?</p>
+            <p class="nyaq-answer">Initially I just wanted to learn and play with Redis. I got the idea of this simple app and I ended up replacing my Apache server by Nginx, learning how to make a NodeJS app, discovering Socket.io, a bit of responsive design with Bootstrap,
+                using Piwik for analytics and much more... Discoveries are unlimited and that's why I love programming :) I'm not a web developer so I discovered all of this and to be honest I've been truly amazed about what is out there. I didn't realize
+                that web programming was so rich and that there were awesome free/open-source softwares with insane high quality standards. I put a list of open-source resources I used in LinkingWords at the end of this NYAQ. Thanks a lot to you folks
+                for creating this new open-source world.</p>
+        </div>
+
+        <div class="nyaq-question-group">
+            <p class="nyaq-question">What are those initials next to each message?</p>
+            <p class="nyaq-answer">Basically it's your profile picture. As I said I didn't want images here. Those two letters could be the initials of a character you create... just role play and make your imagination works!</p>
+        </div>
+
+        <div class="nyaq-question-group">
+            <p class="nyaq-question">Are my conversations secured?</p>
+            <p class="nyaq-answer">Nope. I'm not going to purchase a SSL certificate to secure your stupid conversations about the last episode of GoT. But as I said everything is volatile here so nothing is stored.</p>
+        </div>
+
+        <div class="nyaq-question-group">
+            <p class="nyaq-question">Why are the versions of LinkingWords labeled in reverse order from Omega to Alpha?</p>
+            <p class="nyaq-answer">Because at the beginning there is the perfection of the Void. As soon as you write your first line of code you're bringing entropy and bugs into the world. People think they are improving their software with time making it better so that they
+                can proudly bump the version number. But you cannot fight entropy and your software will degrade with time. We are doomed :'(</p>
+        </div>
+
+        <div class="nyaq-question-group">
+            <p class="nyaq-question">Why is the CSS of the site so crappy?</p>
+            <p class="nyaq-answer">I'm not a web developer and if there is one thing I struggled a lot with it's definitively CSS... I must be missing something. So I ended up doing the worst thing possible: tweaking the css until I got something visually acceptable. (I also
+                got pretty frustrated with the pervasive callback paradigm in NodeJS. I burnt myself many times with the <a href="http://callbackhell.com/" target="_blank">callback hell</a>)</p>
+        </div>
+
+        <div class="nyaq-question-group">
+            <p class="nyaq-question">Who'd be stupid enough to put such a FAQ in a small alert dialog?</p>
+            <p class="nyaq-answer">That's funny you ask that because it totally sounds like I could do it.</p>
+        </div>
+
+        List of open-source resources used in LinkingWords:
+        <ul>
+            <li><a href="http://nginx.org/" target="_blank">Nginx</a>
+            </li>
+            <li><a href="https://nodejs.org/" target="_blank">NodeJS</a>
+            </li>
+            <li><a href="http://socket.io/" target="_blank">Socket.io</a>
+            </li>
+            <li><a href="http://redis.io/" target="_blank">Redis</a>
+            </li>
+            <li><a href="http://expressjs.com/" target="_blank">Express (node module)</a>
+            </li>
+            <li>
+                <a href="https://icons8.com/" target="_blank">Icons8</a>
+            </li>
+            <li><a href="https://jquery.com/" target="_blank">JQuery</a>
+            </li>
+            <li>And more: <a href="http://alertifyjs.com/" target="_blank">AlertifyJS</a>,
+                <a href="http://soapbox.github.io/jQuery-linkify/" target="_blank">Linkify</a>
+                <a href="https://github.com/codepb/jquery-template" target="_blank">JQuery template</a>
+                <a href="https://github.com/btmills/geopattern" target="_blank">GeoPattern</a>
+                <a href="https://github.com/CodeSeven/toastr" target="_blank">Toastr</a>
+            </li>
+        </ul>
+
+        LinkingWords is also open source and I'd be glad to hear your comments: <a href="https://github.com/Absurdev/LinkingWords" target="_blank">LinkingWords</a>
+
+        <div><b>Contact: </b ><span id="email"></span>
+        </div>
+
+        <div>
+            PS: <em>Please don't try to make SQL injection against my Redis db :( Thanks!</em>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/jquery.linkify.min.js"></script>
+    <script src="js/jquery.loadTemplate-1.4.5.min.js"></script>
+    <script src="js/jquery.tooltipster.min.js"></script>
+    <script src="js/jquery.ba-throttle-debounce.min.js"></script>
+    <script src="js/geopattern.min.js"></script>
+    <script src="js/toastr.min.js"></script>
+    <script src="js/alertify.min.js"></script>
+    <script src="js/lw-alertify-alerts.js"></script>
+    <script src="js/md5.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="<%= script_config %>"></script>
+    <script src="<%= client_js %>"></script>
+
+</body>
+
+</html>

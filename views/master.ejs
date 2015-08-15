@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Linking Words Master</title>
+
+    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
+</head>
+
+<body>
+    <h1>Linking Words Master</h1>
+
+    <p>Master Key:
+        <br>
+        <input type="text" id="master-key" placeholder="My precious..." size="40" />
+    </p>
+
+    <form action="/" method="get" id="master-broadcast-form">
+        <textarea rows="4" cols="100" id="master-message" placeholder="Tell me, master..." autofocus></textarea>
+        <br>
+        <input type="radio" name="message-type" value="toastr" id="toastr" checked="checked">
+        <label for="toastr">Toastr</label>
+        <input type="radio" name="message-type" value="status" id="status">
+        <label for="status">Status</label>
+        <input type="submit" id="broadcast-button" value="Broadcast" />
+    </form>
+
+    <form action="/" method="get" id="master-update-class-names-form">
+        <textarea rows="4" cols="100" id="class-names" value='["a","b"]'></textarea>
+        <br>
+        <input type="submit" id="update-class-button" value="Update" />
+    </form>
+
+    <form action="/" method="get" id="master-grant-class-form">
+        <input type="text" id="user-id-to-promote" placeholder="UserId" size="40" />
+        <br>
+        <input type="text" id="grant-class-level" placeholder="class value" size="40" />
+
+        <br>
+        <input type="submit" id="grant-class-button" value="Grant class" />
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/toastr.min.js"></script>
+    <script src="<%= script_config %>"></script>
+    <script src="js/master-client.js"></script>
+</body>
+
+</html>
